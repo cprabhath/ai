@@ -10,6 +10,18 @@
   overflow-x: hidden;
 }
 
+::-webkit-scrollbar{
+  width: 6px;
+}
+
+::-webkit-scrollbar-track{
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #4671EA;
+}
+
 body{
   min-height: 100vh;
   background: linear-gradient(#4671EA, #AC34E7);
@@ -103,7 +115,7 @@ textarea::-webkit-scrollbar{
 }
 
 .row-padding{
-  padding: 80px;
+  padding: 30px;
 }
 
 .row-padding-2{
@@ -156,10 +168,6 @@ textarea::-webkit-scrollbar{
 
   .card{
     margin: 10px 0;
-  }
-
-  .margin-bottom{
-    margin-bottom: 110px;
   }
 
 }
