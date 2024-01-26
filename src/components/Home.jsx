@@ -10,7 +10,7 @@ const Home = () => {
           className="text-white d-flex justify-content-center text-center"
           style={{ overflow: "hidden" }}
         >
-          Free AI Powered toolkit for everyone!
+          AI Powered toolkit for everyone!
         </h1>
         
       </div>
@@ -25,7 +25,7 @@ const Home = () => {
                 style={{ height: "270px" }}
               />
               <div className="card-body">
-                <h5 className="card-title" style={{ overflow: "hidden" }}>Free AI Grammer Checker</h5>
+                <h5 className="card-title" style={{ overflow: "hidden" }}>AI Grammer Checker</h5>
                 <p className="card-text" style={{ overflow: "hidden" }}>
                   Our AI powered grammer checker will help you to write better
                   and error free articles.
@@ -46,7 +46,7 @@ const Home = () => {
                 style={{ height: "270px" }}
               />
               <div className="card-body">
-                <h5 className="card-title" style={{ overflow: "hidden" }}>Free AI Paraphrasing tool</h5>
+                <h5 className="card-title" style={{ overflow: "hidden" }}>AI Paraphrasing tool</h5>
                 <p className="card-text" style={{ overflow: "hidden" }}>
                   Our AI powered paraphrasing tool will help you to write better
                   and error free articles.
@@ -67,7 +67,7 @@ const Home = () => {
                 style={{ height: "270px" }}
               />
               <div className="card-body">
-                <h5 className="card-title" style={{ overflow: "hidden" }}>Free AI PDF Summerizer</h5>
+                <h5 className="card-title" style={{ overflow: "hidden" }}>AI PDF Summerizer</h5>
                 <p className="card-text" style={{ overflow: "hidden" }}>
                   Our AI powered PDF summerizer tool will help you to summerize your PDFs.
                 </p>
