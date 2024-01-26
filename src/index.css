@@ -27,6 +27,7 @@ body{
 }
 
 .wrapper{
+  height: 80vh;
   background: #fff;
   border-radius: 5px;
   padding: 25px 25px 30px;
@@ -107,6 +108,13 @@ textarea::-webkit-scrollbar{
 
 .row-padding-2{
   padding: 20px;
+}
+
+.container-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%; 
 }
 
 @media(max-width: 767px){
