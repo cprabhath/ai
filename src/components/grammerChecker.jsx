@@ -73,7 +73,7 @@ const GrammerChecker = () => {
         <div className="row row-padding">
           <div className="col-6">
             <div>
-              <div className="wrapper">
+              <div className="wrapper" style={{ height: "80vh" }}>
              
                 <h2 className="d-flex justify-content-between"  style={{ overflow:"hidden" }}> 
                 <Link to="/">
@@ -92,7 +92,7 @@ const GrammerChecker = () => {
                   spellCheck="true"
                   placeholder="Type something here..."
                   required
-                  style={{ overflow: "hidden", resize: "none", overflowY: "auto" }}
+                  style={{ overflow: "hidden", resize: "none", overflowY: "auto", height:"100%"}}
                 ></textarea>
                 <div className="d-flex justify-content-between inline">
                   <p>word count : {countWords(paragraph)}</p>
@@ -118,12 +118,15 @@ const GrammerChecker = () => {
           </div>
           <div className="col-6">
             <div>
-              <div className="wrapper">
+              <div className="wrapper" style={{ height: "80vh" }}>
                 <h2 style={{ overflow:"hidden" }}>Corrected Text</h2>
                 {
-                  !generated && loading == false && <p className="text-muted small">
+                  !generated && loading == false && 
+                  <div style={{  overflow: "hidden", width:"100%", height:"90%", display:"flex", padding:"10%" }}>
+                  <p className=" text-muted small" style={{ margin:"auto" }}>
                   Your paragraphs will appear here. You can copy it to clipboard by clicking on the copy button.
                 </p>
+                </div>
                 }
                 {
                   loading == true ? (
