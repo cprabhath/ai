@@ -30,8 +30,8 @@ const Home = () => {
                   Our AI powered grammer checker will help you to write better
                   and error free articles.
                 </p>
-                <Link to="/grammar" className="btn btn-primary border-0" data-mdb-ripple-init>
-                  AI Grammer Checker  
+                <Link to="/grammar" className="btn btn-primary border-0 shadow-0" data-mdb-ripple-init>
+                  AI Grammer Checker <i className="mx-2 fas fa-arrow-right"></i>
                 </Link>
               </div>
             </div>
@@ -51,8 +51,8 @@ const Home = () => {
                   Our AI powered paraphrasing tool will help you to write better
                   and error free articles.
                 </p>
-                <button className="btn btn-primary" data-mdb-ripple-init disabled={true}>
-                  Coming Soon
+                <button className="btn btn-primary shadow-0" data-mdb-ripple-init disabled={true}>
+                  Coming Soon <i className="mx-2 fas fa-arrow-right"></i>
                 </button>
               </div>
             </div>
@@ -71,8 +71,8 @@ const Home = () => {
                 <p className="card-text" style={{ overflow: "hidden" }}>
                   Our AI powered PDF summerizer tool will help you to summerize your PDFs.
                 </p>
-                <button className="btn btn-primary" data-mdb-ripple-init disabled={true}>
-                  Coming Soon
+                <button className="btn btn-primary shadow-0" data-mdb-ripple-init disabled={true}>
+                  Coming Soon <i className="mx-2 fas fa-arrow-right"></i>
                 </button>
               </div>
           </div>
