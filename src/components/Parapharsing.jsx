@@ -18,7 +18,7 @@ const Parapharsing = () => {
     try {
       setLoading(true);
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const prompt = `Parapharse the given text and don't change the meaning of it. The original paragraph is as follows: ${paragraph}`;
+      const prompt = `Parapharse the given text and don't change the meaning of it show only Paraphrased text. The original paragraph is as follows: ${paragraph}`;
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
