@@ -40,8 +40,6 @@ const GrammerChecker = () => {
   
     const handleInputChange = (event) => {
       setParagraph(event.target.value);
-      event.target.style.height = "auto";
-      event.target.style.height = event.target.scrollHeight + "px";
     };
   
     const clear = () => {
