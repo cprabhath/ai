@@ -80,7 +80,7 @@ const GrammerChecker = () => {
               </h2>
               <p className="mb-1">
                 This tool uses the power of AI to correct your grammar mistakes.
-                Simply enter your text below and click on the generate button.
+                Simply enter your text below and click on the check button.
               </p>
               <textarea
                 value={paragraph}
@@ -186,7 +186,7 @@ const GrammerChecker = () => {
                       </div>
                       <p className="text-muted small mt-2 w-100">
                         *Sometimes, AI makes mistakes. Please click on the
-                        "Generate" button again if you see unusual characters in
+                        "check" button again if you see unusual characters in
                         the paragraphs. This tool is still in beta.
                       </p>
                     </div>
