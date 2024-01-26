@@ -14,7 +14,8 @@ const Footer = () => {
         © {year} Copyright <br/> Design and Developed By: {""}
         <a className="text-body fw-bold" href="https://cprabhath.github.io/" target="_blank" rel="noreferrer">
           Prabhath Hettiarachchi
-        </a>
+        </a> | 
+        version 1.0.8
       </div>
     </footer>
   );
