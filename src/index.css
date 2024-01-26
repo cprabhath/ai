@@ -154,4 +154,8 @@ textarea::-webkit-scrollbar{
     margin: 10px 0;
   }
 
+  .margin-bottom{
+    margin-bottom: 110px;
+  }
+
 }

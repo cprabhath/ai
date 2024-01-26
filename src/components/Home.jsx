@@ -14,7 +14,7 @@ const Home = () => {
         </h1>
         
       </div>
-      <div className="mt-2">
+      <div className="mt-2 margin-bottom">
         <div className="row row-padding-2">
           <div className="col">
             <div className="card">
