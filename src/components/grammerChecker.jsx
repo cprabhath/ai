@@ -12,7 +12,7 @@ const GrammerChecker = () => {
 
   const generate = async (paragraph) => {
     if (!paragraph) {
-      toast.info("Please add some text to generate");
+      toast.info("Please add some text to generate 😒");
       return;
     }
     try {
@@ -31,7 +31,7 @@ const GrammerChecker = () => {
       }
       setGenerated(text);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message, + error.code + "" + "😲");
       setGenerated("");
       setLoading(false);
       setParagraph("");
@@ -55,7 +55,7 @@ const GrammerChecker = () => {
     el.select();
     document.execCommand("copy");
     document.body.removeChild(el);
-    toast.success("Copied to clipboard");
+    toast.success("Copied to clipboard 😎");
   };
 
   const countWords = (str) => {
@@ -75,7 +75,7 @@ const GrammerChecker = () => {
                 <Link to="/">
                   <i className="fa-solid fa-arrow-left"></i>
                 </Link>
-                Free Grammar Correction
+                Grammar Correction
                 <i className=""></i>
               </h2>
               <p className="mb-1">
