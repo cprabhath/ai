@@ -1,42 +1,26 @@
-import { useState } from "react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { useEffect, useState } from "react";
+import { useContentGenerator } from "../utils/AIModel";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const Parapharsing = () => {
   const [paragraph, setParagraph] = useState("");
   const [generated, setGenerated] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { loading, generate } = useContentGenerator();
+  const [accuracies, setAccuracy] = useState(0);
 
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
+  useEffect(() => {
+    accuracy(paragraph, generated);
+  }, [generated, paragraph])
 
-  const generate = async (paragraph) => {
-    if (!paragraph) {
-      toast.info("Please add some text to generate 😒");
-      return;
-    }
-    try {
-      setLoading(true);
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const prompt = `Parapharse the given text and don't change the meaning of it show only Paraphrased text. The original paragraph is as follows: ${paragraph}`;
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
-      if (text.includes("error")) {
-        toast.error("Something went wrong");
-        return;
-      }
-      if (text) {
-        setLoading(false);
-      }
-      setGenerated(text);
-    } catch (error) {
-      toast.error(error.message, + error.code + "" + "😲");
-      setGenerated("");
-      setLoading(false);
-      setParagraph("");
-    }
+  const prompts =
+    "Rewrite the following text with the same meaning in a different way. show only Rewrited text. The original paragraph is as follows: ";
+
+  const handleGenerate = () => {
+    generate(paragraph, setGenerated, setParagraph, prompts);
   };
+
+
 
   const handleInputChange = (event) => {
     setParagraph(event.target.value);
@@ -45,6 +29,19 @@ const Parapharsing = () => {
   const clear = () => {
     setGenerated("");
     setParagraph("");
+  };
+
+  const accuracy = (original, generated) => {
+    let count = 0;
+    let originalWords = original.split(" ");
+    let generatedWords = generated.split(" ");
+    for (let i = 0; i < originalWords.length; i++) {
+      if (originalWords[i] == generatedWords[i]) {
+        count++;
+      }
+    }
+    setAccuracy((count / originalWords.length) * 100);
+    return
   };
 
   const copyToClipboard = (e) => {
@@ -100,11 +97,11 @@ const Parapharsing = () => {
                 <p>word count : {countWords(paragraph)}</p>
                 <div className="d-flex inline-2">
                   <button
-                    onClick={() => generate(paragraph)}
+                    onClick={() => handleGenerate()}
                     className="me-2 btn shadow-0 btn-gen rounded-0"
                     disabled={loading ? true : false}
                   >
-                    Paraphrase 
+                    Paraphrase
                   </button>
                   <button
                     onClick={clear}
@@ -184,10 +181,14 @@ const Parapharsing = () => {
                           <i className="fa-regular fa-copy"></i>
                         </button>
                       </div>
-                      <p className="text-muted small mt-2 w-100">
+                      <p className="text-muted small w-100">
+                        Similarity with original: {accuracies.toFixed(2)}%
+                      </p>
+                      <p className="text-muted small w-100">
                         *Sometimes, AI makes mistakes. Please click on the
-                        "check" button again if you see unusual characters in
-                        the paragraphs. This tool is still in beta.
+                        &quot;check&quot; button again if you see unusual
+                        characters in the paragraphs. This tool is still in
+                        beta.
                       </p>
                     </div>
                   </div>
