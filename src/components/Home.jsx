@@ -17,7 +17,7 @@ const Home = () => {
       <div className="mt-2 margin-bottom">
         <div className="row row-padding-2">
           <div className="col">
-            <div className="card">
+            <div className="card rounded-0">
               <img
                 src="https://th.bing.com/th/id/R.4b779771eb9037d9ddbe506ac8c6a75a?rik=GeubsLIlq5CtRQ&pid=ImgRaw&r=0"
                 className="card-img-top"
@@ -38,7 +38,7 @@ const Home = () => {
           </div>
           <div className="col">
           <div className="col">
-            <div className="card">
+            <div className="card rounded-0">
               <img
                 src="https://www.learnesl.net/wp-content/uploads/2022/03/Paraphrasing-Tool.jpg"
                 className="card-img-top"
@@ -59,8 +59,7 @@ const Home = () => {
           </div>
           </div>
           <div className="col" >
-          <div className="col">
-            <div className="card">
+            <div className="card rounded-0">
               <img
                 src="https://th.bing.com/th/id/OIP.fRdBsqDbUBdL2NaDz2vZegHaD_?rs=1&pid=ImgDetMain"
                 className="card-img-top"
@@ -76,7 +75,6 @@ const Home = () => {
                   Coming Soon
                 </button>
               </div>
-            </div>
           </div>
           </div>
         </div>

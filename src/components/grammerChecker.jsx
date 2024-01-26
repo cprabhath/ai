@@ -43,10 +43,6 @@ const GrammerChecker = () => {
   };
 
   const clear = () => {
-    if (!paragraph || !generated) {
-      toast.info("Nothing to clear");
-      return;
-    }
     setGenerated("");
     setParagraph("");
   };
@@ -71,7 +67,7 @@ const GrammerChecker = () => {
       <div className="row row-padding">
         <div className="col-6">
           <div>
-            <div className="wrapper">
+            <div className="wrapper rounded-0">
               <h2
                 className="d-flex justify-content-between"
                 style={{ overflow: "hidden" }}
@@ -88,6 +84,7 @@ const GrammerChecker = () => {
               </p>
               <textarea
                 value={paragraph}
+                className="rounded-0"
                 onChange={(e) => handleInputChange(e)}
                 spellCheck="true"
                 placeholder="Type something here..."
@@ -104,14 +101,14 @@ const GrammerChecker = () => {
                 <div className="d-flex inline-2">
                   <button
                     onClick={() => generate(paragraph)}
-                    className="me-2 btn shadow-0 btn-gen"
+                    className="me-2 btn shadow-0 btn-gen rounded-0"
                     disabled={loading ? true : false}
                   >
                     Check
                   </button>
                   <button
                     onClick={clear}
-                    className="me-2 btn shadow-0 btn-clear"
+                    className="btn shadow-0 btn-clear rounded-0"
                     disabled={loading ? true : false}
                   >
                     Clear
@@ -123,7 +120,7 @@ const GrammerChecker = () => {
         </div>
         <div className="col-6">
           <div>
-            <div className="wrapper">
+            <div className="wrapper rounded-0">
               <h2 style={{ overflow: "hidden" }}>Corrected Text</h2>
               {!generated && loading == false && (
                 <div
@@ -152,7 +149,7 @@ const GrammerChecker = () => {
                   }}
                 >
                   <div
-                    className="spinner-border text-primary"
+                    className="spinner-border text-info"
                     role="status"
                     style={{ margin: "auto" }}
                   >
@@ -163,7 +160,7 @@ const GrammerChecker = () => {
                 generated && (
                   <div>
                     <textarea
-                      className="border-0"
+                      className="border-0 rounded-0"
                       value={generated}
                       onChange={(e) => setGenerated(e.target.value)}
                       spellCheck="true"
