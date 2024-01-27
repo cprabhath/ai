@@ -280,7 +280,7 @@ const TextSummerizer = () => {
                               onClick={openModal}
                               className="btn btn-sm shadow-0"
                               data-mdb-tooltip-init
-                              title="copy to clipboard"
+                              title="Feedback"
                             >
                               <i className="fa-regular fa-comment"></i>
                             </button>
