@@ -28,8 +28,8 @@ const Parapharsing = () => {
      "Rewrite the following text with the same meaning in a different way as paragraphs don't use point form. show only Rewrited text. The original paragraph is as follows: ";
 
   const handleGenerate = () => {
-    if(countWords(paragraph) < 50){
-      toast.error("Please enter at least 50 words");
+    if(countWords(paragraph) < 30){
+      toast.error("Please enter at least 30 words");
       return
     }
     generate(paragraph, setGenerated, setParagraph, prompts);
@@ -169,7 +169,7 @@ const Parapharsing = () => {
               </h2>
               <p className="mb-1">
                 Our AI powered Paraphrasing tool will help you to write better
-                and error free articles. use at least 50 words paragraph(s).
+                and error free articles. use at least 30 words paragraph(s).
               </p>
               <textarea
                 value={paragraph}
