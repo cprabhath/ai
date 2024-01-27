@@ -103,7 +103,7 @@ const Home = () => {
                   </p>
                   <Link
                     to="/grammar"
-                    className="btn btn-primary border-0 shadow-0"
+                    className="btn btn-primary border-0 shadow-0 mt-4"
                     data-mdb-ripple-init
                   >
                     AI Grammer Checker{" "}
@@ -132,7 +132,7 @@ const Home = () => {
                   </p>
                   <Link
                     to="/paraphrasing"
-                    className="btn btn-primary border-0 shadow-0"
+                    className="btn btn-primary border-0 shadow-0 mt-4"
                     data-mdb-ripple-init
                   >
                     AI Paraphrasing tool{" "}
@@ -159,7 +159,7 @@ const Home = () => {
                     Our AI powered text summarizer tool will help you to summarize large texts.
                   </p>
                   <Link
-                    className="btn btn-primary border-0 shadow-0"
+                    className="btn btn-primary border-0 shadow-0 mt-4"
                     data-mdb-ripple-init
                     to="/text"
                   >
