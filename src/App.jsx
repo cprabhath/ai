@@ -29,6 +29,7 @@ function App() {
         <Route path="/pdf" element={<PDFSummerizer />}></Route>
         <Route path="/text" element={<TextSummerizer />}></Route>
         <Route path="/ai" element={<AicontentDetection />}></Route>
+        <Route path="*" element={<Home />}></Route>
       </Routes>
       <ToastContainer className="toast-position" position="top-right" />
       

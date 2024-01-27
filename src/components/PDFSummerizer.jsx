@@ -1,7 +1,10 @@
 const PDFSummerizer = () => {
-  return (
-    <div>PDFSummerizer</div>
-  )
-}
 
-export default PDFSummerizer
+  return (
+    <div>
+      <h1>PDF</h1>
+    </div>
+  );
+};
+
+export default PDFSummerizer;

@@ -9,13 +9,13 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="bg-body-tertiary text-center mt-1">
+    <footer className="bg-body-tertiary text-center mt-1 fixed-bottom">
       <div className="text-center p-3">
         © {year} Copyright <br/> Design and Developed By: {""}
         <a className="text-body fw-bold" href="https://cprabhath.github.io/" target="_blank" rel="noreferrer">
           Prabhath Hettiarachchi
         </a> | 
-        version 1.0.8
+        version 1.1.6
       </div>
     </footer>
   );
