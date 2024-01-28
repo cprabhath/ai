@@ -163,7 +163,7 @@ const TextSummerizer = () => {
                   className="d-flex justify-content-center text-center"
                   style={{ overflow: "hidden" }}
                 >
-                  Text Summarizing
+                  AI Text Summarizer
                 </h2>
               <p className="mb-1 text-center ">
                 Our AI powered Text Summarizing tool will help you to write better

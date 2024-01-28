@@ -166,7 +166,7 @@ const GrammerChecker = () => {
                   className="d-flex justify-content-center text-center"
                   style={{ overflow: "hidden" }}
                 >
-                  Grammar Correction
+                 AI Grammar Checker
                 </h2>
                 <p className="mb-1 text-center ">
                   This tool uses the power of AI to correct your grammar
