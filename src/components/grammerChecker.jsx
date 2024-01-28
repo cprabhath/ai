@@ -24,7 +24,7 @@ const GrammerChecker = () => {
   }, [paragraph, generated]);
 
   const prompts =
-    "Corrects the grammar, punctuation, and prepositions in the given paragraph with a target accuracy of 99% as paragraphs. if grammar, punctuation, and prepositions are 99% correct, then show the original paragraphs. show only corrected text. The original paragraph is as follows: ";
+    "Corrects the grammar, punctuation, and prepositions in the given paragraph with a target accuracy of 99% as paragraphs don't use point form. if grammar, punctuation, and prepositions are 99% correct, then show the original paragraphs. show only corrected text. The original paragraph is as follows: ";
 
   const handleGenerate = () => {
     generate(paragraph, setGenerated, setParagraph, prompts);
