@@ -160,7 +160,7 @@ const Parapharsing = () => {
                   className="d-flex justify-content-center text-center"
                   style={{ overflow: "hidden" }}
                 >
-                  AI Powered Paraphrasing
+                  AI Text Paraphraser
                 </h2>
               <p className="mb-1 text-center ">
                 Our AI powered Paraphrasing tool will help you to write better

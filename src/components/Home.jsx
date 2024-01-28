@@ -18,7 +18,7 @@ const Home = () => {
     "AI Grammar Checker": {
       component: <GrammerCheck />,
     },
-    "AI Paraphrasing tool": {
+    "AI Text Paraphraser": {
       component: <Paraphrase />,
     },
     "AI Text Summarizer": {
