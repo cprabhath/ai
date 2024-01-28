@@ -24,7 +24,7 @@
 
 body{
   height: 100vh;
-  background: linear-gradient(#4671EA, #AC34E7);
+  background: linear-gradient(#3499e7, #5900d5);
 }
 ::selection{
   color: #fff;

@@ -55,25 +55,17 @@ const GrammerChecker = () => {
   };
 
   const calculateAccuracy = (original, corrected) => {
-    const words1 = original.split(/\s+/);
-    const words2 = corrected.split(/\s+/);
-    const totalWords = words1.length;
-
-    let diffCount = 0;
-
-    words1.forEach((word, index) => {
-      if (!words2[index] || word !== words2[index]) {
-        diffCount++;
-      }
-    });
-
-    if (words2.length > words1.length) {
-      diffCount += words2.length - words1.length;
-    }
-
-    const diffPercentage = (diffCount / totalWords) * 100;
-    setAccuracy(diffPercentage);
-    return;
+      const originalWords = original.split(/\s+/).filter(Boolean);
+      const summarizedWords = corrected.split(/\s+/).filter(Boolean);
+    
+      const originalWordCount = originalWords.length;
+      const summarizedWordCount = summarizedWords.length;
+    
+      const wordsRemoved = summarizedWordCount - originalWordCount;
+      const percentageRemoved = (wordsRemoved / originalWordCount) * 100;
+    
+      setAccuracy(percentageRemoved);
+      return
   };
 
   const saveTextToFile = () => {
@@ -175,7 +167,7 @@ const GrammerChecker = () => {
                 </p>
                 <textarea
                   value={paragraph}
-                  className="rounded-0"
+                  className="rounded-xl"
                   onChange={(e) => handleInputChange(e)}
                   spellCheck="true"
                   placeholder="Type something here..."
@@ -192,14 +184,14 @@ const GrammerChecker = () => {
                   <div className="d-flex inline-2">
                     <button
                       onClick={() => handleGenerate()}
-                      className="me-2 btn shadow-0 btn-gen rounded-0"
+                      className="me-2 btn shadow-0 btn-gen rounded-xl"
                       disabled={loading ? true : false}
                     >
                       Check
                     </button>
                     <button
                       onClick={clear}
-                      className="btn shadow-0 btn-clear rounded-0"
+                      className="btn shadow-0 btn-clear rounded-xl"
                       disabled={loading ? true : false}
                     >
                       Clear
@@ -240,11 +232,11 @@ const GrammerChecker = () => {
                     }}
                   >
                     <div
-                      className="spinner-border text-info"
+                      className="spinner-border text-primary border-1"
                       role="status"
-                      style={{ margin: "auto" }}
+                      style={{ width: "4rem", height: "4rem", margin: "auto" }}
                     >
-                      <span className="visually-hidden">Loading...</span>
+                      
                     </div>
                   </div>
                 ) : (

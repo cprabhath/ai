@@ -19,7 +19,7 @@ export const useContentGenerator = () => {
 
   const generate = async (paragraph, setGenerated, setParagraph, prompts) => {
     if (!paragraph) {
-      toast.info("Please add some text to generate 😒");
+      toast.error("Please add some text to check 😬");
       return;
     }
     try {
@@ -38,7 +38,7 @@ export const useContentGenerator = () => {
       }
       setGenerated(text);
     } catch (error) {
-      toast.error(error.message + " " + error.code + " 😲");
+      toast.error("Unexpected error occured ☹️");
       setGenerated("");
       setParagraph("");
     } finally {

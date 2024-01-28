@@ -28,7 +28,7 @@ const Parapharsing = () => {
 
   const handleGenerate = () => {
     if(countWords(paragraph) < 30){
-      toast.error("Please enter at least 30 words");
+      toast.error("I Think you don't have enought word count to parapharse 🙄");
       return
     }
     generate(paragraph, setGenerated, setParagraph, prompts);
@@ -168,7 +168,7 @@ const Parapharsing = () => {
               </p>
               <textarea
                 value={paragraph}
-                className="rounded-0"
+                className="rounded-xl"
                 onChange={(e) => handleInputChange(e)}
                 spellCheck="true"
                 placeholder="Type something here..."
@@ -185,14 +185,14 @@ const Parapharsing = () => {
                 <div className="d-flex inline-2">
                   <button
                     onClick={() => handleGenerate()}
-                    className="me-2 btn shadow-0 btn-gen rounded-0"
+                    className="me-2 btn shadow-0 btn-gen  rounded-xl"
                     disabled={loading ? true : false}
                   >
                     Paraphrase
                   </button>
                   <button
                     onClick={clear}
-                    className="btn shadow-0 btn-clear rounded-0"
+                    className="btn shadow-0 btn-clear  rounded-xl"
                     disabled={loading ? true : false}
                   >
                     Clear
@@ -233,12 +233,12 @@ const Parapharsing = () => {
                   }}
                 >
                   <div
-                    className="spinner-border text-info"
-                    role="status"
-                    style={{ margin: "auto" }}
-                  >
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
+                      className="spinner-border text-primary border-1"
+                      role="status"
+                      style={{ width: "4rem", height: "4rem", margin: "auto" }}
+                    >
+                      
+                    </div>
                 </div>
               ) : (
                 generated && (
