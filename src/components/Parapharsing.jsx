@@ -28,7 +28,7 @@ const Parapharsing = () => {
 
   const handleGenerate = () => {
     if(countWords(paragraph) < 30){
-      toast.error("I Think you don't have enought word count to parapharse 🙄");
+      toast.error("I Think you don't have enough word count to parapharse 🙄");
       return
     }
     generate(paragraph, setGenerated, setParagraph, prompts);
