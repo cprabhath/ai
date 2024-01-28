@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 export const sendMail = async (email, message) => {
   try {
-    await axios.post("http://localhost:3000/send-email", {
+    await axios.post("https://mailsender-jgeh.onrender.com/send-email", {
       from: email,
       message: message,
     });
