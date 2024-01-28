@@ -54,18 +54,17 @@ const GrammerChecker = () => {
     return str.trim().split(/\s+/).length;
   };
 
-  const calculateAccuracy = (original, corrected) => {
-      const originalWords = original.split(/\s+/).filter(Boolean);
-      const summarizedWords = corrected.split(/\s+/).filter(Boolean);
-    
-      const originalWordCount = originalWords.length;
-      const summarizedWordCount = summarizedWords.length;
-    
-      const wordsRemoved = summarizedWordCount - originalWordCount;
-      const percentageRemoved = (wordsRemoved / originalWordCount) * 100;
-    
-      setAccuracy(percentageRemoved);
-      return
+  const calculateAccuracy = (original, generated) => {
+    let count = 0;
+    let originalWords = original.split(" ");
+    let generatedWords = generated.split(" ");
+    for (let i = 0; i < originalWords.length; i++) {
+      if (originalWords[i] == generatedWords[i]) {
+        count++;
+      }
+    }
+    setAccuracy((count / originalWords.length) * 100);
+    return
   };
 
   const saveTextToFile = () => {
