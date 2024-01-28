@@ -15,7 +15,7 @@ const Footer = () => {
         <a className="text-body fw-bold" href="https://cprabhath.github.io/" target="_blank" rel="noreferrer">
           Prabhath Hettiarachchi
         </a> | 
-        version 1.2.0
+        version 1.2.1
       </div>
     </footer>
   );

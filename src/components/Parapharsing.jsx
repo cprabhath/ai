@@ -2,13 +2,15 @@ import { useEffect, useState, Fragment } from "react";
 import { useContentGenerator } from "../utils/AIModel";
 import { toast } from "react-toastify";
 import { Dialog, Transition } from "@headlessui/react";
+import { sendMail } from "../utils/SendMail";
 
 const Parapharsing = () => {
   const [paragraph, setParagraph] = useState("");
   const [generated, setGenerated] = useState("");
   const { loading, generate } = useContentGenerator();
   const [accuracies, setAccuracy] = useState(0);
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
+  const [email, setEmail] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -72,7 +74,8 @@ const Parapharsing = () => {
   };
 
   const saveTextToFile = () => {
-    toast.success("Thank you for your feedback 😍");
+    sendMail(email, text);
+    setEmail("");
     setText("");
     closeModal();
   };
@@ -113,7 +116,13 @@ const Parapharsing = () => {
                     Oops! Did we slip up? Let us know how we can make things right!
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500">
+                      <input
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full rounded-0 mb-2 p-2 border-2 border-primary"
+                        placeholder="Enter your email address"
+                      />
                       <textarea
                         value={text}
                         onChange={(e) => setText(e.target.value)}
