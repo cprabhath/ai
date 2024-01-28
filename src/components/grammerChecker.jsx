@@ -1,6 +1,5 @@
 import { useEffect, useState, Fragment } from "react";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 import { useContentGenerator } from "../utils/AIModel";
 import { Dialog, Transition } from "@headlessui/react";
 
@@ -159,21 +158,17 @@ const GrammerChecker = () => {
         </Dialog>
       </Transition>
       <div>
-        <div className="row row-padding">
+        <div className="row">
           <div className="col-6">
             <div>
               <div className="wrapper rounded-0">
                 <h2
-                  className="d-flex justify-content-between"
+                  className="d-flex justify-content-center text-center"
                   style={{ overflow: "hidden" }}
                 >
-                  <Link to="/">
-                    <i className="fa-solid fa-arrow-left"></i>
-                  </Link>
                   Grammar Correction
-                  <i className=""></i>
                 </h2>
-                <p className="mb-1">
+                <p className="mb-1 text-center ">
                   This tool uses the power of AI to correct your grammar
                   mistakes. Simply enter your text below and click on the check
                   button.
@@ -189,7 +184,7 @@ const GrammerChecker = () => {
                     overflow: "hidden",
                     resize: "none",
                     overflowY: "auto",
-                    height: "70%",
+                    height: "75%",
                   }}
                 ></textarea>
                 <div className="d-flex justify-content-between inline">
@@ -265,7 +260,7 @@ const GrammerChecker = () => {
                         style={{
                           resize: "none",
                           overflowY: "auto",
-                          height: "55vh",
+                          height: "65vh",
                         }}
                       ></textarea>
                       <div className="container-2">

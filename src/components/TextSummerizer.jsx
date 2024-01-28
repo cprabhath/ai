@@ -1,7 +1,6 @@
 import { useEffect, useState, Fragment } from "react";
 import { useContentGenerator } from "../utils/AIModel";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 
 const TextSummerizer = () => {
@@ -160,17 +159,13 @@ const TextSummerizer = () => {
         <div className="col-6">
           <div>
             <div className="wrapper rounded-0">
-              <h2
-                className="d-flex justify-content-between"
-                style={{ overflow: "hidden" }}
-              >
-                <Link to="/">
-                  <i className="fa-solid fa-arrow-left"></i>
-                </Link>
-                Text Summarizer
-                <i className=""></i>
-              </h2>
-              <p className="mb-1">
+            <h2
+                  className="d-flex justify-content-center text-center"
+                  style={{ overflow: "hidden" }}
+                >
+                  Text Summarizing
+                </h2>
+              <p className="mb-1 text-center ">
                 Our AI powered Text Summarizing tool will help you to write better
                 and error free articles. use at least 20 words paragraph(s).
               </p>
@@ -185,7 +180,7 @@ const TextSummerizer = () => {
                   overflow: "hidden",
                   resize: "none",
                   overflowY: "auto",
-                  height: "70%",
+                  height: "75%",
                 }}
               ></textarea>
               <div className="d-flex justify-content-between inline">
@@ -261,7 +256,7 @@ const TextSummerizer = () => {
                       style={{
                         resize: "none",
                         overflowY: "auto",
-                        height: "55vh",
+                        height: "65vh",
                       }}
                     ></textarea>
                     <div className="container-2">

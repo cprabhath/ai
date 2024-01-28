@@ -1,7 +1,6 @@
 import { useEffect, useState, Fragment } from "react";
 import { useContentGenerator } from "../utils/AIModel";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 
 const Parapharsing = () => {
@@ -157,17 +156,13 @@ const Parapharsing = () => {
         <div className="col-6">
           <div>
             <div className="wrapper rounded-0">
-              <h2
-                className="d-flex justify-content-between"
-                style={{ overflow: "hidden" }}
-              >
-                <Link to="/">
-                  <i className="fa-solid fa-arrow-left"></i>
-                </Link>
-                Text Paraphraser 2.0
-                <i className=""></i>
-              </h2>
-              <p className="mb-1">
+            <h2
+                  className="d-flex justify-content-center text-center"
+                  style={{ overflow: "hidden" }}
+                >
+                  AI Powered Paraphrasing
+                </h2>
+              <p className="mb-1 text-center ">
                 Our AI powered Paraphrasing tool will help you to write better
                 and error free articles. use at least 30 words paragraph(s).
               </p>
@@ -182,7 +177,7 @@ const Parapharsing = () => {
                   overflow: "hidden",
                   resize: "none",
                   overflowY: "auto",
-                  height: "70%",
+                  height: "75%",
                 }}
               ></textarea>
               <div className="d-flex justify-content-between inline">
@@ -258,7 +253,7 @@ const Parapharsing = () => {
                       style={{
                         resize: "none",
                         overflowY: "auto",
-                        height: "55vh",
+                        height: "65vh",
                       }}
                     ></textarea>
                     <div className="container-2">
