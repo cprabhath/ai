@@ -55,15 +55,16 @@ const GrammerChecker = () => {
   };
 
   const calculateAccuracy = (original, generated) => {
-    let count = 0;
     let originalWords = original.split(" ");
     let generatedWords = generated.split(" ");
+    let count = 0;
     for (let i = 0; i < originalWords.length; i++) {
-      if (originalWords[i] == generatedWords[i]) {
+      if (originalWords[i] != generatedWords[i]) {
         count++;
       }
     }
-    setAccuracy((count / originalWords.length) * 100);
+    let accuracy = (count / originalWords.length) * 100;
+    setAccuracy(accuracy);
     return
   };
 
