@@ -7,7 +7,7 @@ const Home = lazy(() => import("./components/Home"));
 
 function App() {
 
-  const [maintain] = useState(true);
+  const [maintain] = useState(false);
   
   return (
     <Suspense
