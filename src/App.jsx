@@ -1,10 +1,14 @@
 import { ToastContainer } from "react-toastify";
 import { Routes, Route } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState } from "react";
+import Maintaince from "./utils/Maintain";
 
 const Home = lazy(() => import("./components/Home"));
 
 function App() {
+
+  const [maintain] = useState(true);
+  
   return (
     <Suspense
       fallback={
@@ -25,7 +29,9 @@ function App() {
       }
     >
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        {
+          maintain ? <Route path="/" element={<Maintaince />}></Route> : <Route path="/" element={<Home />}></Route>
+        }
         <Route path="*" element={<Home />}></Route>
       </Routes>
       <ToastContainer position="top-right" theme="colored" hideProgressBar />

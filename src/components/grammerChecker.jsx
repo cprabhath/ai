@@ -66,6 +66,7 @@ const GrammerChecker = () => {
       }
     }
     let accuracy = (count / originalWords.length) * 100;
+
     setAccuracy(accuracy);
     return
   };
@@ -123,14 +124,15 @@ const GrammerChecker = () => {
                       <textarea
                         value={text}
                         onChange={(e) => setText(e.target.value)}
-                        className="w-full rounded-0"
+                        className="w-full rounded-0 p-2 border-2 border-primary"
                         placeholder="Type something here..."
                         style={{
                           resize: "none",
                           overflowY: "auto",
                           height: "20vh",
                         }}
-                      ></textarea>
+                      >
+                      </textarea>
                     </p>
                   </div>
 
@@ -187,7 +189,8 @@ const GrammerChecker = () => {
                     overflowY: "auto",
                     height: "75%",
                   }}
-                ></textarea>
+                >
+                </textarea>
                 <div className="d-flex justify-content-between inline">
                   <p>word count : {countWords(paragraph)}</p>
                   <div className="d-flex inline-2">
@@ -293,7 +296,7 @@ const GrammerChecker = () => {
                             ? ""
                             : accuracies == 0
                             ? "Perfect..! No grammar mistakes"
-                            : `Total Changes: ${accuracies.toFixed(2)}%`}
+                            : accuracies > 100 ? "Something not right. Please try again" : `Total Changes: ${accuracies.toFixed(2)}%`}
                         </p>
                         <p className="text-muted small mt-2 w-100 m-0">
                           *Sometimes, AI makes mistakes. Please click on the

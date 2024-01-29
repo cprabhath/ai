@@ -11,7 +11,7 @@ const TextSummerizer = () => {
   const [accuracies, setAccuracy] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState("");
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   function closeModal() {
     setIsOpen(false);
@@ -23,15 +23,15 @@ const TextSummerizer = () => {
 
   useEffect(() => {
     calculateWordsRemoved(paragraph, generated);
-  }, [generated, paragraph])
+  }, [generated, paragraph]);
 
   const prompts =
-     "Imagine you are an expert summarizer, skilled in the art of condensing information to its core essentials without losing the meaning or context. Your task is to read the following paragraph carefully and produce a concise summary that captures the main points, crucial details, and overall essence of the text. Your summary should be clear, succinct, and no longer than a few sentences. Aim to preserve the original message and intent, ensuring that someone who reads only your summary will grasp the key insights and takeaways from the paragraph. Keep in mind the importance of accuracy and brevity in your summarization. show only summarized text. if no need of summarized the given paragraph then show 'No need to summarize' The original paragraph is as follows: ";
+    "Imagine you are an expert summarizer, skilled in the art of condensing information to its core essentials without losing the meaning or context. Your task is to read the following paragraph carefully and produce a concise summary that captures the main points, crucial details, and overall essence of the text. Your summary should be clear, succinct, and no longer than a few sentences. Aim to preserve the original message and intent, ensuring that someone who reads only your summary will grasp the key insights and takeaways from the paragraph. Keep in mind the importance of accuracy and brevity in your summarization. show only summarized text. if no need of summarized the given paragraph then show 'No need to summarize' The original paragraph is as follows: ";
 
   const handleGenerate = () => {
-    if(countWords(paragraph) < 20){
+    if (countWords(paragraph) < 20) {
       toast.error("I Think you don't have enough word count to Summarize 🙄");
-      return
+      return;
     }
     generate(paragraph, setGenerated, setParagraph, prompts);
   };
@@ -45,21 +45,19 @@ const TextSummerizer = () => {
     setParagraph("");
   };
 
-
   function calculateWordsRemoved(originalText, summarizedText) {
     const originalWords = originalText.split(/\s+/).filter(Boolean);
     const summarizedWords = summarizedText.split(/\s+/).filter(Boolean);
-  
+
     const originalWordCount = originalWords.length;
     const summarizedWordCount = summarizedWords.length;
-  
+
     const wordsRemoved = originalWordCount - summarizedWordCount;
     const percentageRemoved = (wordsRemoved / originalWordCount) * 100;
-  
-    setAccuracy(percentageRemoved);
-    return
-  }
 
+    setAccuracy(percentageRemoved);
+    return;
+  }
 
   const copyToClipboard = (e) => {
     e.preventDefault();
@@ -116,10 +114,11 @@ const TextSummerizer = () => {
                     className="text-lg font-medium leading-6 text-gray-900 mb-3"
                     style={{ overflow: "hidden" }}
                   >
-                    Oops! Did we slip up? Let us know how we can make things right!
+                    Oops! Did we slip up? Let us know how we can make things
+                    right!
                   </Dialog.Title>
                   <div className="mt-2">
-                  <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500">
                       <input
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -168,15 +167,16 @@ const TextSummerizer = () => {
         <div className="col-6">
           <div>
             <div className="wrapper rounded-0">
-            <h2
-                  className="d-flex justify-content-center text-center"
-                  style={{ overflow: "hidden" }}
-                >
-                  AI Text Summarizer
-                </h2>
+              <h2
+                className="d-flex justify-content-center text-center"
+                style={{ overflow: "hidden" }}
+              >
+                AI Text Summarizer
+              </h2>
               <p className="mb-1 text-center ">
-                Our AI powered Text Summarizing tool will help you to write better
-                and error free articles. use at least 20 words paragraph(s).
+                Our AI powered Text Summarizing tool will help you to write
+                better and error free articles. use at least 20 words
+                paragraph(s).
               </p>
               <textarea
                 value={paragraph}
@@ -229,8 +229,8 @@ const TextSummerizer = () => {
                   }}
                 >
                   <p className=" text-muted small" style={{ margin: "auto" }}>
-                    Your summarized paragraphs will appear here. You can copy it to
-                    clipboard by clicking on the copy button.
+                    Your summarized paragraphs will appear here. You can copy it
+                    to clipboard by clicking on the copy button.
                   </p>
                 </div>
               )}
@@ -245,12 +245,10 @@ const TextSummerizer = () => {
                   }}
                 >
                   <div
-                      className="spinner-border text-primary border-1"
-                      role="status"
-                      style={{ width: "4rem", height: "4rem", margin: "auto" }}
-                    >
-                      
-                    </div>
+                    className="spinner-border text-primary border-1"
+                    role="status"
+                    style={{ width: "4rem", height: "4rem", margin: "auto" }}
+                  ></div>
                 </div>
               ) : (
                 generated && (
@@ -273,26 +271,28 @@ const TextSummerizer = () => {
                       <div className="d-flex justify-content-between">
                         <p>word count : {countWords(generated)}</p>
                         <div className="d-flex inline-2">
-                            <button
-                              onClick={(e) => copyToClipboard(e)}
-                              className="me-2 btn btn-sm shadow-0"
-                              data-mdb-tooltip-init
-                              title="copy to clipboard"
-                            >
-                              <i className="fa-regular fa-copy"></i>
-                            </button>
-                            <button
-                              onClick={openModal}
-                              className="btn btn-sm shadow-0"
-                              data-mdb-tooltip-init
-                              title="Feedback"
-                            >
-                              <i className="fa-regular fa-comment"></i>
-                            </button>
-                          </div>
+                          <button
+                            onClick={(e) => copyToClipboard(e)}
+                            className="me-2 btn btn-sm shadow-0"
+                            data-mdb-tooltip-init
+                            title="copy to clipboard"
+                          >
+                            <i className="fa-regular fa-copy"></i>
+                          </button>
+                          <button
+                            onClick={openModal}
+                            className="btn btn-sm shadow-0"
+                            data-mdb-tooltip-init
+                            title="Feedback"
+                          >
+                            <i className="fa-regular fa-comment"></i>
+                          </button>
+                        </div>
                       </div>
                       <p className="text-muted small w-100">
-                        Compressed upto : {accuracies.toFixed(2)}%
+                        {accuracies > 100
+                          ? "Something not right. Please try again"
+                          : `Summarized upto : ${accuracies.toFixed(2)}%`}
                       </p>
                       <p className="text-muted small w-100">
                         *Sometimes, AI makes mistakes. Please click on the

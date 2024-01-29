@@ -288,7 +288,9 @@ const Parapharsing = () => {
                           </div>
                       </div>
                       <p className="text-muted small w-100">
-                        Similarity with original: {accuracies.toFixed(2)}%
+                        {
+                          accuracies > 100 ? "Something not right. Please try again" : `Similarity with original: ${accuracies.toFixed(2)}%`
+                        }
                       </p>
                       <p className="text-muted small w-100 mb-0 pb-0">
                         *Sometimes, AI makes mistakes. Please click on the

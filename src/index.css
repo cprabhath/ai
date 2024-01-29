@@ -26,6 +26,8 @@ body{
   height: 100vh;
   background: linear-gradient(#3499e7, #5900d5);
 }
+
+
 ::selection{
   color: #fff;
   background: #4671EA;
@@ -65,7 +67,6 @@ textarea::placeholder{
 }
 
 textarea:is(:focus, :valid){
-  padding: 14px;
   border: 2px solid #4671EA;
 }
 
