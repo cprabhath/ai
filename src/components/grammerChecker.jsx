@@ -1,24 +1,17 @@
 import { useEffect, useState, Fragment } from "react";
 import { toast } from "react-toastify";
 import { useContentGenerator } from "../utils/AIModel";
-import { Dialog, Transition } from "@headlessui/react";
-import { sendMail } from "../utils/SendMail";
+import Model from "./Model";
 
 const GrammerChecker = () => {
   const [paragraph, setParagraph] = useState("");
   const [generated, setGenerated] = useState("");
   const { loading, generate } = useContentGenerator();
   const [accuracies, setAccuracy] = useState(0);
-  const [text, setText] = useState('');
-  const [email, setEmail] = useState('');
-  let [isOpen, setIsOpen] = useState(false);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   function openModal() {
-    setIsOpen(true);
+    setIsModalOpen(!isModalOpen);
   }
 
   useEffect(() => {
@@ -71,100 +64,17 @@ const GrammerChecker = () => {
     return
   };
 
-  const saveTextToFile = () => {
-    sendMail(email, text);
-    setEmail("");
-    setText("");
-    closeModal();
-  };
-
   return (
     <>
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black/25" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="rounded-0 w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900 mb-3"
-                    style={{ overflow: "hidden" }}
-                  >
-                   Oops! Did we slip up? Let us know how we can make things right!
-                  </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      <input
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full rounded-0 mb-2 p-2 border-2 border-primary"
-                        placeholder="Enter your email address"
-                      />
-                      <textarea
-                        value={text}
-                        onChange={(e) => setText(e.target.value)}
-                        className="w-full rounded-0 p-2 border-2 border-primary"
-                        placeholder="Type something here..."
-                        style={{
-                          resize: "none",
-                          overflowY: "auto",
-                          height: "20vh",
-                        }}
-                      >
-                      </textarea>
-                    </p>
-                  </div>
-
-                  <div className="mt-4" style={{ overflow: "hidden" }}>
-                    <button
-                      type="button"
-                      className="me-2 rounded-0 inline-flex justify-center rounded-md border-0 bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={saveTextToFile}
-                      style={{ overflow: "hidden" }}
-                    >
-                      Send
-                    </button>
-                    <button
-                      type="button"
-                      className="rounded-0 inline-flex justify-center rounded-md border-1  px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                      style={{ overflow: "hidden" }}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
+      <Model 
+      isOpen={isModalOpen}
+      setIsOpen={setIsModalOpen}
+    />
       <div>
         <div className="row">
           <div className="col-6">
             <div>
-              <div className="wrapper rounded-0">
+              <div className="wrapper">
                 <h2
                   className="d-flex justify-content-center text-center"
                   style={{ overflow: "hidden" }}
@@ -173,8 +83,7 @@ const GrammerChecker = () => {
                 </h2>
                 <p className="mb-1 text-center ">
                   This tool uses the power of AI to correct your grammar
-                  mistakes. Simply enter your text below and click on the check
-                  button.
+                  mistakes. Simply enter your text below
                 </p>
                 <textarea
                   value={paragraph}
@@ -264,7 +173,7 @@ const GrammerChecker = () => {
                         style={{
                           resize: "none",
                           overflowY: "auto",
-                          height: "65vh",
+                          height: "64vh",
                         }}
                       ></textarea>
                       <div className="container-2">

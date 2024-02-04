@@ -1,14 +1,19 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
-import { HashRouter } from 'react-router-dom';
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+import App from "./App";
+import { store } from "./services/store";
+import { HashRouter } from "react-router-dom";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HashRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </HashRouter>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

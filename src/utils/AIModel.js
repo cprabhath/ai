@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 export const useContentGenerator = () => {
   const [loading, setLoading] = useState(false);
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
   const safetySettings = [
     {
