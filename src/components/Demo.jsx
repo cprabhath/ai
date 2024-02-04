@@ -106,7 +106,7 @@ const Demo = () => {
           className="d-flex justify-content-center text-center"
           style={{ overflow: "hidden" }}
         >
-          Turn your website article into a summary
+          Turn website article into a summary
           <span className="ml-2 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
             New
           </span>
