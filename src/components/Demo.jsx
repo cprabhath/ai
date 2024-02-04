@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { copy, linkIcon, loader, tick } from "../assets";
-import { useLazyGetSummaryQuery } from "../services/article";
 import { toast } from "react-toastify";
 import Model from "./Model";
+import { useContentGenerator } from "../utils/AIModel";
 
 const Demo = () => {
-  const [article, setArticle] = useState({
-    url: "",
-    summary: "",
-  });
+  const [article, setArticle] = useState("");
+  const [url, setUrl] = useState("");
   const [allArticles, setAllArticles] = useState([]);
   const [copied, setCopied] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // RTK lazy query
-  const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
+  const { loading, generate } = useContentGenerator();
 
-  // Load data from localStorage on mount
+  const validUrl = /^(ftp|http|https):\/\/[^ "]+$/;
+
   useEffect(() => {
     const articlesFromLocalStorage = JSON.parse(
       localStorage.getItem("articles")
@@ -24,39 +22,48 @@ const Demo = () => {
     if (articlesFromLocalStorage) {
       setAllArticles(articlesFromLocalStorage);
     }
-  }, []);
+
+    const existingArticle = allArticles.find((item) => item.url === url);
+
+    if (article && url && !existingArticle && url.match(validUrl)) {
+      let updatedArticles = [...allArticles, { url, article }];
+
+      if (updatedArticles.length > 5) {
+        updatedArticles = updatedArticles.slice(-5);
+      }
+      setAllArticles(updatedArticles);
+      localStorage.setItem("articles", JSON.stringify(updatedArticles));
+    }
+  }, [article]);
+
+  const prompts =
+    "Go through the provided URL and Summarize that article of which I provided to you. show as paragraphs clearly don't use point form. don't show symbols including astric, hash etc.. in the paragraph.. The website link is as follows: ";
+
+  const handleGenerate = () => {
+    generate(url, setArticle, setUrl, prompts);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validUrl = /^(ftp|http|https):\/\/[^ "]+$/;
 
-    if (!article.url.match(validUrl)) {
+    if (!url.match(validUrl)) {
       toast.error("Wait! That's not a valid URL 😅");
       return;
     }
 
-    const existingArticle = allArticles.find(
-      (item) => item.url === article.url
-    );
+    const existingArticle = allArticles.find((item) => item.url === url);
 
-    if (existingArticle) return setArticle(existingArticle);
-
-    const { data } = await getSummary({ articleUrl: article.url });
-    if (data?.summary) {
-      const newArticle = { ...article, summary: data.summary };
-      const updatedAllArticles = [newArticle, ...allArticles];
-
-      // update state and local storage
-      setArticle(newArticle);
-      setAllArticles(updatedAllArticles);
-      localStorage.setItem("articles", JSON.stringify(updatedAllArticles));
+    if (existingArticle) {
+      setArticle(existingArticle.article);
+    } else {
+      handleGenerate();
     }
   };
 
   const copyToClipboard = (e) => {
     e.preventDefault();
     const el = document.createElement("textarea");
-    el.value = article.summary;
+    el.value = article;
     document.body.appendChild(el);
     el.select();
     document.execCommand("copy");
@@ -69,7 +76,7 @@ const Demo = () => {
   };
 
   // copy the url and toggle the icon for user feedback
-  const handleCopy = (copyUrl) => {
+  const handleCopy = (copyUrl, e) => {
     setCopied(copyUrl);
     navigator.clipboard.writeText(copyUrl);
     setTimeout(() => setCopied(false), 3000);
@@ -84,6 +91,11 @@ const Demo = () => {
   function openModal() {
     setIsModalOpen(!isModalOpen);
   }
+
+  const clearArticle = () => {
+    setArticle("");
+    setUrl("");
+  };
 
   return (
     <>
@@ -110,54 +122,51 @@ const Demo = () => {
             <img
               src={linkIcon}
               alt="link-icon"
-              className="absolute left-0 my-2 ml-3 w-5"
+              className="absolute left-0 my-2 ml-3 w-5 mt-3"
             />
 
             <input
               type="url"
               placeholder="Paste the article link"
-              value={article.url}
-              onChange={(e) => setArticle({ ...article, url: e.target.value })}
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="url_input peer" // When you need to style an element based on the state of a sibling element, mark the sibling with the peer class, and use peer-* modifiers to style the target element
+              className="url_input peer mt-2" // When you need to style an element based on the state of a sibling element, mark the sibling with the peer class, and use peer-* modifiers to style the target element
             />
             <button
               type="submit"
-              className="submit_btn peer-focus:border-gray-700 peer-focus:text-gray-700 "
+              className="submit_btn border-0 text-black mt-3"
             >
               <p>↵</p>
             </button>
           </form>
 
           {/* Browse History */}
-          <div className="flex flex-col gap-1 max-h-60 overflow-y-auto">
+          <div className="flex flex-col gap-1 max-h-50 overflow-y-auto">
             {allArticles.reverse().map((item, index) => (
-                <div
-                  key={`link-${index}`}
-                  onClick={() => setArticle(item)}
-                  className="link_card"
-                >
-                  <div
-                    className="copy_btn"
-                    onClick={() => handleCopy(item.url)}
-                  >
-                    <img
-                      src={copied === item.url ? tick : copy}
-                      alt={copied === item.url ? "tick_icon" : "copy_icon"}
-                      className="w-[40%] h-[40%] object-contain"
-                    />
-                  </div>
-                  <p className="flex-1 font-satoshi text-blue-700 font-medium text-sm truncate">
-                    {item.url}
-                  </p>
+              <div
+                key={`link-${index}`}
+                onClick={(e) => handleCopy(item.url, e)}
+                className="link_card"
+              >
+                <div className="copy_btn" onClick={() => handleCopy(item.url)}>
+                  <img
+                    src={copied === item.url ? tick : copy}
+                    alt={copied === item.url ? "tick_icon" : "copy_icon"}
+                    className="w-[40%] h-[40%] object-contain"
+                  />
                 </div>
+                <p className="flex-1 font-satoshi text-blue-700 font-medium text-sm truncate">
+                  {item.url}
+                </p>
+              </div>
             ))}
           </div>
         </div>
 
         {/* Display Result */}
         <div className="mt-4 max-w-full flex justify-center items-center pl-8 pr-8">
-          {isFetching ? (
+          {loading ? (
             <div
               style={{
                 overflow: "hidden",
@@ -173,35 +182,23 @@ const Demo = () => {
                 style={{ width: "4rem", height: "4rem", margin: "auto" }}
               ></div>
             </div>
-          ) : error ? (
-            <p className="font-inter font-bold text-rose-600 text-center">
-              Well, that wasn't supposed to happen...
-              <br />
-              <span className="font-satoshi font-normal text-rose-600">
-                {error?.data?.error ||
-                  error?.error?.message ||
-                  "Please try again"}
-              </span>
-            </p>
-          ) : article.summary == "" ? (
+          ) : article == "" ? (
             <p className=" text-muted small mt-44">
               Your summarized Article will appear here. You can copy it to
               clipboard by clicking on the copy button.
             </p>
           ) : (
-            article.summary && (
+            article && (
               <>
                 <div className="flex flex-col gap-3">
-                  <div className="summary_box">
-                    <p className="font-inter font-medium text-sm text-gray-700">
-                      {article.summary}
+                  <div className="summary_box h-96">
+                    <p className="font-inter font-medium text-sm text-gray-700 text-justify">
+                      {article}
                     </p>
                   </div>
                   <div className="container-2">
                     <div className="d-flex justify-content-between">
-                      <p className="m-0">
-                        word count : {countWords(article.summary)}
-                      </p>
+                      <p className="m-0">word count : {countWords(article)}</p>
                       <div className="d-flex inline-2">
                         <button
                           onClick={(e) => copyToClipboard(e)}
@@ -212,8 +209,16 @@ const Demo = () => {
                           <i className="fa-regular fa-copy"></i>
                         </button>
                         <button
+                          onClick={() => clearArticle()}
+                          className="me-2 btn btn-sm shadow-0"
+                          data-mdb-tooltip-init
+                          title="Clear"
+                        >
+                          <i className="fa-solid fa-xmark"></i>
+                        </button>
+                        <button
                           onClick={openModal}
-                          className="btn btn-sm shadow-0"
+                          className="btn btn-sm shadow-0 "
                           data-mdb-tooltip-init
                           title="Feedback"
                         >
