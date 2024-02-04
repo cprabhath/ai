@@ -157,12 +157,7 @@ const Demo = () => {
 
         {/* Display Result */}
         <div className="mt-4 max-w-full flex justify-center items-center pl-8 pr-8">
-          {article.summary == "" ? (
-            <p className=" text-muted small mt-44">
-              Your summarized Article will appear here. You can copy it to
-              clipboard by clicking on the copy button.
-            </p>
-          ) : isFetching ? (
+          {isFetching ? (
             <div
               style={{
                 overflow: "hidden",
@@ -187,6 +182,11 @@ const Demo = () => {
                   error?.error?.message ||
                   "Please try again"}
               </span>
+            </p>
+          ) : article.summary == "" ? (
+            <p className=" text-muted small mt-44">
+              Your summarized Article will appear here. You can copy it to
+              clipboard by clicking on the copy button.
             </p>
           ) : (
             article.summary && (
