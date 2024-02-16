@@ -35,8 +35,7 @@ const Hero = () => {
           <span className="orange_gradient "> AI ToolKit</span>
         </h1>
         <h2 className="desc">
-          Our super powered toolkit will help you to write better and error free
-          and It&apos;s free and easy to use 🤩
+          Our super-powered toolkit will help you write better and error-free. It's free and easy to use. 🤩
         </h2>
       </header>
 
