@@ -10,9 +10,8 @@ const Hero = () => {
         <nav className="flex justify-between items-center w-full mb-3 pt-3">
           <img src={logo} alt="sumz_logo" className="w-10 object-contain" />
 
-          <div className="font-bold blue_gradient">
-            You're currently using with limited features. Please wait for the
-            next update.
+          <div className="font-bold ">
+            Completly Free AI ToolKit. No Signup Required.🤗
           </div>
           {/* <div className="flex justify-between items-center">
         <a

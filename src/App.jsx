@@ -10,7 +10,7 @@ const Hero = lazy(() => import("./components/Hero"));
 
 
 const App = () => {
-  const [maintain] = useState(false);
+  const [maintain] = useState(true);
 
   return (
     

@@ -23,8 +23,7 @@ const TextSummerizer = () => {
 
   const handleGenerate = () => {
     if (countWords(paragraph) < 20) {
-      toast.error("I Think you don't have enough word count to Summarize 🙄");
-      return;
+      return toast.error("I Think you don't have enough word count to Summarize 🙄");
     }
     generate(paragraph, setGenerated, setParagraph, prompts);
   };

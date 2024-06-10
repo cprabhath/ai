@@ -18,7 +18,8 @@ export const useContentGenerator = () => {
   ];
 
   const generate = async (paragraph, setGenerated, setParagraph, prompts) => {
-    if (!paragraph) {
+    const emply = paragraph.trim();
+    if (!emply) {
       toast.error("Please add some text to check 😬");
       return;
     }
