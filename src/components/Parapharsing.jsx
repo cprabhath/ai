@@ -2,6 +2,7 @@ import { useEffect, useState, Fragment } from "react";
 import { useContentGenerator } from "../utils/AIModel";
 import { toast } from "react-toastify";
 import Model from "./Model";
+import { countWords } from "../utils/wordCount";
 
 const Parapharsing = () => {
   const [paragraph, setParagraph] = useState("");
@@ -16,15 +17,15 @@ const Parapharsing = () => {
 
   useEffect(() => {
     accuracy(paragraph, generated);
-  }, [generated, paragraph])
+  }, [generated, paragraph]);
 
   const prompts =
-     "Rewrite the following text with the same meaning in a different way as paragraphs don't use point form. show only Rewrited text. The original paragraph is as follows: ";
+    "Rewrite the following text with the same meaning in a different way as paragraphs don't use point form. show only Rewrited text. The original paragraph is as follows: ";
 
   const handleGenerate = () => {
-    if(countWords(paragraph) < 30){
+    if (countWords(paragraph) < 30) {
       toast.error("I Think you don't have enough word count to parapharse 🙄");
-      return
+      return;
     }
     generate(paragraph, setGenerated, setParagraph, prompts);
   };
@@ -48,7 +49,7 @@ const Parapharsing = () => {
       }
     }
     setAccuracy((count / originalWords.length) * 100);
-    return
+    return;
   };
 
   const copyToClipboard = (e) => {
@@ -62,26 +63,19 @@ const Parapharsing = () => {
     toast.success("Copied to clipboard 😎");
   };
 
-  const countWords = (str) => {
-    return str.trim().split(/\s+/).length;
-  };
-
   return (
     <div>
-    <Model 
-      isOpen={isModalOpen}
-      setIsOpen={setIsModalOpen}
-    />
+      <Model isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       <div className="row row-padding">
         <div className="col-6">
           <div>
             <div className="wrapper">
-            <h2
-                  className="d-flex justify-content-center text-center"
-                  style={{ overflow: "hidden" }}
-                >
-                  AI Text Paraphraser
-                </h2>
+              <h2
+                className="d-flex justify-content-center text-center"
+                style={{ overflow: "hidden" }}
+              >
+                AI Text Paraphraser
+              </h2>
               <p className="mb-1 text-center ">
                 Our AI powered Paraphrasing tool will help you to write better
                 and error free articles. use at least 30 words paragraph(s).
@@ -101,7 +95,13 @@ const Parapharsing = () => {
                 }}
               ></textarea>
               <div className="d-flex justify-content-between inline">
-                <p>word count : {countWords(paragraph)}</p>
+                {countWords(paragraph) > 0 ? (
+                  <p className="text-muted small">
+                    word count : {countWords(paragraph)}
+                  </p>
+                ) : (
+                  <div>{""}</div>
+                )}
                 <div className="d-flex inline-2">
                   <button
                     onClick={() => handleGenerate()}
@@ -137,8 +137,8 @@ const Parapharsing = () => {
                   }}
                 >
                   <p className=" text-muted small" style={{ margin: "auto" }}>
-                    Your parapharsed paragraphs will appear here. You can copy it to
-                    clipboard by clicking on the copy button.
+                    Your parapharsed paragraphs will appear here. You can copy
+                    it to clipboard by clicking on the copy button.
                   </p>
                 </div>
               )}
@@ -153,12 +153,10 @@ const Parapharsing = () => {
                   }}
                 >
                   <div
-                      className="spinner-border text-primary border-1"
-                      role="status"
-                      style={{ width: "4rem", height: "4rem", margin: "auto" }}
-                    >
-                      
-                    </div>
+                    className="spinner-border text-primary border-1"
+                    role="status"
+                    style={{ width: "4rem", height: "4rem", margin: "auto" }}
+                  ></div>
                 </div>
               ) : (
                 generated && (
@@ -178,29 +176,35 @@ const Parapharsing = () => {
                     ></textarea>
                     <div className="container-2">
                       <div className="d-flex justify-content-between">
-                        <p className="m-0">word count : {countWords(generated)}</p>
+                        <p className="m-0 text-muted small">
+                          word count : {countWords(generated)}
+                        </p>
                         <div className="d-flex inline-2">
-                            <button
-                              onClick={(e) => copyToClipboard(e)}
-                              className="me-2 btn btn-sm shadow-0"
-                              data-mdb-tooltip-init
-                              title="copy to clipboard"
-                            >
-                              <i className="fa-regular fa-copy"></i>
-                            </button>
-                            <button
-                              onClick={openModal}
-                              className="btn btn-sm shadow-0"
-                              data-mdb-tooltip-init
-                              title="Feedback"
-                            >
-                              <i className="fa-regular fa-comment"></i>
-                            </button>
-                          </div>
+                          <button
+                            onClick={(e) => copyToClipboard(e)}
+                            className="me-2 btn btn-sm shadow-0"
+                            data-mdb-tooltip-init
+                            title="copy to clipboard"
+                          >
+                            <i className="fa-regular fa-copy"></i>
+                          </button>
+                          <button
+                            onClick={openModal}
+                            className="btn btn-sm shadow-0"
+                            data-mdb-tooltip-init
+                            title="Feedback"
+                          >
+                            <i className="fa-regular fa-comment"></i>
+                          </button>
+                        </div>
                       </div>
                       <p className="text-muted small w-100">
                         {
-                          accuracies > 100 ? "Something not right. Please try again" : `Similarity with original: ${accuracies.toFixed(2)}%`
+                        accuracies > 100
+                          ? "Something not right. Please try again"
+                          : `Similarity with original: ${accuracies.toFixed(
+                              2
+                            )}%`
                         }
                       </p>
                       <p className="text-muted small w-100 mb-0 pb-0">

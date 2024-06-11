@@ -1,6 +1,7 @@
 import { useEffect, useState, Fragment } from "react";
 import { useContentGenerator } from "../utils/AIModel";
 import { toast } from "react-toastify";
+import { countWords } from "../utils/wordCount";
 import Model from "./Model";
 
 const TextSummerizer = () => {
@@ -23,7 +24,9 @@ const TextSummerizer = () => {
 
   const handleGenerate = () => {
     if (countWords(paragraph) < 20) {
-      return toast.error("I Think you don't have enough word count to Summarize 🙄");
+      return toast.error(
+        "I Think you don't have enough word count to Summarize 🙄"
+      );
     }
     generate(paragraph, setGenerated, setParagraph, prompts);
   };
@@ -62,17 +65,9 @@ const TextSummerizer = () => {
     toast.success("Copied to clipboard 😎");
   };
 
-  const countWords = (str) => {
-    return str.trim().split(/\s+/).length;
-  };
-
-
   return (
     <div>
-     <Model 
-      isOpen={isModalOpen}
-      setIsOpen={setIsModalOpen}
-    />
+      <Model isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       <div className="row row-padding">
         <div className="col-6">
           <div>
@@ -102,7 +97,13 @@ const TextSummerizer = () => {
                 }}
               ></textarea>
               <div className="d-flex justify-content-between inline">
-                <p>word count : {countWords(paragraph)}</p>
+                {countWords(paragraph) > 0 ? (
+                  <p className="text-muted small">
+                    word count : {countWords(paragraph)}
+                  </p>
+                ) : (
+                  <div>{""}</div>
+                )}
                 <div className="d-flex inline-2">
                   <button
                     onClick={() => handleGenerate()}
@@ -177,7 +178,7 @@ const TextSummerizer = () => {
                       }}
                     ></textarea>
                     <div className="container-2">
-                      <div className="d-flex justify-content-between">
+                      <div className="d-flex justify-content-between text-muted small">
                         <p>word count : {countWords(generated)}</p>
                         <div className="d-flex inline-2">
                           <button
@@ -199,9 +200,12 @@ const TextSummerizer = () => {
                         </div>
                       </div>
                       <p className="text-muted small w-100">
-                        {accuracies > 100
+                        {
+                        generated.startsWith("No need to summarize") ? "" :
+                        accuracies > 100
                           ? "Something not right. Please try again"
-                          : `Summarized upto : ${accuracies.toFixed(2)}%`}
+                          : `Summarized upto : ${accuracies.toFixed(2)}%`
+                        }
                       </p>
                       <p className="text-muted small w-100">
                         *Sometimes, AI makes mistakes. Please click on the

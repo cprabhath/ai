@@ -198,7 +198,7 @@ const Demo = () => {
                   </div>
                   <div className="container-2">
                     <div className="d-flex justify-content-between">
-                      <p className="m-0">word count : {countWords(article)}</p>
+                      <p className="m-0 text-muted small">word count : {countWords(article)}</p>
                       <div className="d-flex inline-2">
                         <button
                           onClick={(e) => copyToClipboard(e)}

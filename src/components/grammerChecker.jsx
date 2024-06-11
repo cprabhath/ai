@@ -2,6 +2,7 @@ import { useEffect, useState, Fragment } from "react";
 import { toast } from "react-toastify";
 import { useContentGenerator } from "../utils/AIModel";
 import Model from "./Model";
+import { countWords } from "../utils/wordCount";
 
 const GrammerChecker = () => {
   const [paragraph, setParagraph] = useState("");
@@ -42,34 +43,32 @@ const GrammerChecker = () => {
     el.select();
     document.execCommand("copy");
     document.body.removeChild(el);
-    toast.success("Copied to clipboard 😎");
+    return toast.success("Copied to clipboard 😎");
   };
 
-  const countWords = (str) => {
-    return str.trim().split(/\s+/).length;
-  };
 
   const calculateAccuracy = (original, generated) => {
-    let originalWords = original.split(" ");
-    let generatedWords = generated.split(" ");
-    let count = 0;
-    for (let i = 0; i < originalWords.length; i++) {
-      if (originalWords[i] != generatedWords[i]) {
-        count++;
+    const originalWords = original.split(/\s+/).filter(Boolean);
+    const generatedWords = generated.split(/\s+/).filter(Boolean);
+
+    const originalWordCount = originalWords.length;
+    const generatedWordCount = generatedWords.length;
+
+    let accuracy = 0;
+    for (let i = 0; i < originalWordCount; i++) {
+      if (originalWords[i] !== generatedWords[i]) {
+        accuracy++;
+      } else if (generatedWords[i] !== originalWords[i]) {
+        accuracy++;
       }
     }
-    let accuracy = (count / originalWords.length) * 100;
 
-    setAccuracy(accuracy);
-    return
+    return setAccuracy(accuracy);
   };
 
   return (
     <>
-      <Model 
-      isOpen={isModalOpen}
-      setIsOpen={setIsModalOpen}
-    />
+      <Model isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       <div>
         <div className="row">
           <div className="col-6">
@@ -79,7 +78,7 @@ const GrammerChecker = () => {
                   className="d-flex justify-content-center text-center"
                   style={{ overflow: "hidden" }}
                 >
-                 AI Grammar Checker
+                  AI Grammar Checker
                 </h2>
                 <p className="mb-1 text-center ">
                   This tool uses the power of AI to correct your grammar
@@ -98,10 +97,13 @@ const GrammerChecker = () => {
                     overflowY: "auto",
                     height: "75%",
                   }}
-                >
-                </textarea>
+                ></textarea>
                 <div className="d-flex justify-content-between inline">
-                  <p>word count : {countWords(paragraph)}</p>
+                  {
+                    countWords(paragraph) > 0 ?  (
+                      <p className="text-muted small">word count : {countWords(paragraph)}</p>
+                    ) : <div>{""}</div>
+                  }
                   <div className="d-flex inline-2">
                     <button
                       onClick={() => handleGenerate()}
@@ -156,9 +158,7 @@ const GrammerChecker = () => {
                       className="spinner-border text-primary border-1"
                       role="status"
                       style={{ width: "4rem", height: "4rem", margin: "auto" }}
-                    >
-                      
-                    </div>
+                    ></div>
                   </div>
                 ) : (
                   generated && (
@@ -178,7 +178,7 @@ const GrammerChecker = () => {
                       ></textarea>
                       <div className="container-2">
                         <div className="d-flex justify-content-between">
-                          <p className="m-0">
+                          <p className="m-0 text-muted small">
                             word count : {countWords(generated)}
                           </p>
                           <div className="d-flex inline-2">
@@ -205,7 +205,9 @@ const GrammerChecker = () => {
                             ? ""
                             : accuracies == 0
                             ? "Perfect..! No grammar mistakes"
-                            : accuracies > 100 ? "Something not right. Please try again" : `Total Changes: ${accuracies.toFixed(2)}%`}
+                            : accuracies > 100
+                            ? "Something not right. Please try again"
+                            : `Total Changes: ${accuracies.toFixed(2)}%`}
                         </p>
                         <p className="text-muted small mt-2 w-100 m-0">
                           *Sometimes, AI makes mistakes. Please click on the
