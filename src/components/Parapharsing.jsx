@@ -20,7 +20,7 @@ const Parapharsing = () => {
   }, [generated, paragraph]);
 
   const prompts =
-    "Rewrite the following text with the same meaning in a different way as paragraphs don't use point form. show only Rewrited text. The original paragraph is as follows: ";
+    "Rewrite the following text with the same meaning in a different way as paragraphs don't use point form. show only Rewrited text. Don't use advanced words. The original paragraph is as follows: ";
 
   const handleGenerate = () => {
     if (countWords(paragraph) < 30) {
