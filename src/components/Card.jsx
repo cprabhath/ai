@@ -5,6 +5,7 @@ import Parapharsing from "./Parapharsing";
 import GrammerChecker from "./grammerChecker";
 import TextSummerizer from "./TextSummerizer";
 import Demo from "./Demo";
+import AitoHuman from "./AitoHuman";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -20,6 +21,9 @@ const Card = () => {
     },
     "AI Text Summarizer": {
       component: <TextSummerizer />,
+    },
+    "AI to Human": {
+      component: <AitoHuman />,
     },
     "Article Summarizer": {
       component: <Demo />,

@@ -40,6 +40,7 @@ export const useContentGenerator = () => {
       setGenerated(text);
     } catch (error) {
       toast.error("Unexpected error occured ☹️");
+      console.log(error)
       setGenerated("");
       setParagraph("");
     } finally {
