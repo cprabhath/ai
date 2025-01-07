@@ -7,8 +7,6 @@ import Maintaince from "./utils/Maintain";
 
 const Hero = lazy(() => import("./components/Hero"));
 
-
-
 const App = () => {
   const [maintain] = useState(false);
 

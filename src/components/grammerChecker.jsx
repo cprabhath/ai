@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useContentGenerator } from "../utils/AIModel";
 import Model from "./Model";
@@ -45,7 +45,6 @@ const GrammerChecker = () => {
     document.body.removeChild(el);
     return toast.success("Copied to clipboard 😎");
   };
-
 
   const calculateAccuracy = (original, generated) => {
     const originalWords = original.split(/\s+/).filter(Boolean);
